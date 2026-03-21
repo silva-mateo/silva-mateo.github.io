@@ -56,7 +56,7 @@ const Home = () => {
             Mateo Silva
           </h1>
           <p
-            className="text-5xl md:text-6xl font-light leading-tight tracking-tight"
+            className="text-5xl md:text-6xl font-bold leading-tight tracking-tight"
             style={{
               color: "var(--accent)",
               fontFamily: "var(--font-display)",
