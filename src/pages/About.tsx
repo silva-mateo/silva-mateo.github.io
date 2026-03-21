@@ -1,8 +1,21 @@
 const About = () => {
   return (
-    <main className="min-h-screen flex items-center justify-center">
-      <h1 className="text-4xl font-bold">About</h1>
-    </main>
-  )
-}
-export default About
+    <section
+      id="about"
+      className="min-h-screen flex items-center justify-center px-8 py-32"
+      style={{ backgroundColor: "var(--bg-primary)" }}
+    >
+      <h2
+        className="text-4xl font-bold"
+        style={{
+          color: "var(--text-primary)",
+          fontFamily: "var(--font-display)",
+        }}
+      >
+        About
+      </h2>
+    </section>
+  );
+};
+
+export default About;
