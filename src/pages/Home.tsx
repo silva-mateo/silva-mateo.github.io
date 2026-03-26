@@ -86,7 +86,7 @@ const Home = () => {
 
         <p
           className="text-base md:text-lg font-light leading-relaxed max-w-lg"
-          style={{ color: "var(--text-primary)", opacity: 0.75 }}
+          style={{ color: "var(--text-primary)", opacity: 0.85 }}
         >
           I build software and integrate AI into real-world products. Focused on
           writing clean, maintainable code and delivering practical, scalable

@@ -53,7 +53,7 @@ const About = () => {
           <div className="flex flex-col gap-5">
             <p
               className="text-base md:text-lg font-light leading-relaxed"
-              style={{ color: "var(--text-primary)", opacity: 0.8 }}
+              style={{ color: "var(--text-primary)", opacity: 0.85 }}
             >
               I started programming over three years ago, driven by curiosity
               and the desire to build things that actually work in the real
@@ -62,14 +62,14 @@ const About = () => {
             </p>
             <p
               className="text-base md:text-lg font-light leading-relaxed"
-              style={{ color: "var(--text-primary)", opacity: 0.8 }}
+              style={{ color: "var(--text-primary)", opacity: 0.85 }}
             >
               Experience across the full stack, finding practical ways to
               integrate AI into products.
             </p>
             <p
               className="text-base md:text-lg font-light leading-relaxed"
-              style={{ color: "var(--text-primary)", opacity: 0.8 }}
+              style={{ color: "var(--text-primary)", opacity: 0.85 }}
             >
               Prioritizing clear and maintainable code while building modern,
               practical solutions.
@@ -96,7 +96,7 @@ const About = () => {
                 </span>
                 <span
                   className="text-xs font-light leading-snug"
-                  style={{ color: "var(--text-primary)", opacity: 0.55 }}
+                  style={{ color: "var(--text-primary)", opacity: 0.7 }}
                 >
                   {description}
                 </span>
