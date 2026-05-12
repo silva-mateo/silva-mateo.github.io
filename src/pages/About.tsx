@@ -28,7 +28,7 @@ const About = () => {
     <section
       id="about"
       className="flex items-center justify-center px-8 py-32"
-      style={{ backgroundColor: "var(--bg-primary)" }}
+      style={{ backgroundColor: "var(--bg-secondary)" }}
     >
       <div className="max-w-4xl w-full flex flex-col gap-16">
         <div>
@@ -52,8 +52,8 @@ const About = () => {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="flex flex-col gap-5">
             <p
-              className="text-base md:text-lg font-light leading-relaxed"
-              style={{ color: "var(--text-primary)", opacity: 0.85 }}
+              className="text-base md:text-lg font-normal leading-relaxed"
+              style={{ color: "var(--text-secondary)" }}
             >
               I started programming over three years ago, driven by curiosity
               and the desire to build things that actually work in the real
@@ -61,15 +61,15 @@ const About = () => {
               turned into a genuine passion for software development.
             </p>
             <p
-              className="text-base md:text-lg font-light leading-relaxed"
-              style={{ color: "var(--text-primary)", opacity: 0.85 }}
+              className="text-base md:text-lg font-normal leading-relaxed"
+              style={{ color: "var(--text-secondary)" }}
             >
               Experience across the full stack, finding practical ways to
               integrate AI into products.
             </p>
             <p
-              className="text-base md:text-lg font-light leading-relaxed"
-              style={{ color: "var(--text-primary)", opacity: 0.85 }}
+              className="text-base md:text-lg font-normal leading-relaxed"
+              style={{ color: "var(--text-secondary)" }}
             >
               Prioritizing clear and maintainable code while building modern,
               practical solutions.
@@ -89,14 +89,14 @@ const About = () => {
               >
                 <span style={{ color: "var(--accent)" }}>{icon}</span>
                 <span
-                  className="text-sm font-semibold leading-tight"
+                  className="text-sm md:text-base font-semibold leading-tight"
                   style={{ color: "var(--text-primary)" }}
                 >
                   {title}
                 </span>
                 <span
-                  className="text-xs font-light leading-snug"
-                  style={{ color: "var(--text-primary)", opacity: 0.7 }}
+                  className="text-xs md:text-sm font-normal leading-snug"
+                  style={{ color: "var(--text-secondary)" }}
                 >
                   {description}
                 </span>

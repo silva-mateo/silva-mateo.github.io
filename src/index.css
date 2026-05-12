@@ -1,32 +1,32 @@
 @import "tailwindcss";
 
 :root {
-  --font-display: "Plus Jakarta Sans", sans-serif;
-  --font-body: "DM Sans", sans-serif;
+  --font-display: "Inter", sans-serif;
+  --font-body: "Inter", sans-serif;
 
   font-family: var(--font-body);
 }
 
 [data-theme="dark"] {
-  --bg-primary: #121214;
-  --bg-secondary: #1a1a1d;
-  --bg-card: #1e1e21;
-  --border: #2a2a2e;
-  --text-primary: #e2e2e2;
-  --text-secondary: #777780;
-  --accent: #6e9fff;
-  --accent-hover: #92b6ff;
+  --bg-primary: #111317;
+  --bg-secondary: #171a20;
+  --bg-card: #1d222a;
+  --border: #2d3440;
+  --text-primary: #f5f7fb;
+  --text-secondary: #c3ccd8;
+  --accent: #7aa7ff;
+  --accent-hover: #9bbdff;
 }
 
 [data-theme="light"] {
-  --bg-primary: #f5f5f7;
-  --bg-secondary: #ebebed;
+  --bg-primary: #f7f8fa;
+  --bg-secondary: #edf1f5;
   --bg-card: #ffffff;
-  --border: #d8d8dc;
-  --text-primary: #1a1a1a;
-  --text-secondary: #666670;
-  --accent: #3b6fd4;
-  --accent-hover: #2a5bbf;
+  --border: #d8dee8;
+  --text-primary: #111827;
+  --text-secondary: #3f4854;
+  --accent: #386fd8;
+  --accent-hover: #285bbd;
 }
 
 * {
@@ -40,6 +40,15 @@ body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-synthesis: none;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.72;
 }
 
 html {

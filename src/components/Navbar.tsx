@@ -1,5 +1,5 @@
 import { Sun, Moon, Menu, X } from "lucide-react";
-import { useTheme } from "../context/ThemeContext";
+import { useTheme } from "../context/themeContext";
 import { useEffect, useState } from "react";
 
 const links = [

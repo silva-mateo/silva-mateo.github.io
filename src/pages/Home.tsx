@@ -40,8 +40,8 @@ const Home = () => {
     <main
       className="min-h-screen flex flex-col items-center justify-center px-8 py-32 text-center"
       style={{
-        backgroundColor: "var(--bg-primary)",
-        background: `radial-gradient(ellipse 70% 50% at 50% 50%, color-mix(in srgb, var(--accent) 12%, var(--bg-primary)) 0%, var(--bg-primary) 100%)`,
+        backgroundColor: "var(--bg-secondary)",
+        background: `radial-gradient(ellipse 70% 50% at 50% 45%, color-mix(in srgb, var(--accent) 12%, transparent) 0%, transparent 72%), linear-gradient(180deg, var(--bg-primary) 0%, color-mix(in srgb, var(--bg-primary) 70%, var(--bg-secondary)) 58%, var(--bg-secondary) 100%)`,
       }}
     >
       <div className="max-w-2xl w-full flex flex-col items-center gap-7">
@@ -85,8 +85,8 @@ const Home = () => {
         </div>
 
         <p
-          className="text-base md:text-lg font-light leading-relaxed max-w-lg"
-          style={{ color: "var(--text-primary)", opacity: 0.85 }}
+          className="text-base md:text-lg font-normal leading-relaxed max-w-lg"
+          style={{ color: "var(--text-secondary)" }}
         >
           I build software and integrate AI into real-world products. Focused on
           writing clean, maintainable code and delivering practical, scalable
