@@ -4,27 +4,62 @@ import {
   Mail,
   Send,
   CheckCircle2,
+  CircleAlert,
 } from "lucide-react";
+import { useEffect, useState, type FormEvent } from "react";
 
 const Contact = () => {
   const email = ["mateosilva.contact", "@", "gmail.com"].join("");
+  const formspreeEndpoint = "https://formspree.io/f/xlgzzknq";
+  const [isSending, setIsSending] = useState(false);
+  const [messageSent, setMessageSent] = useState(false);
+  const [messageError, setMessageError] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  useEffect(() => {
+    if (!messageSent) return;
+
+    const timeoutId = window.setTimeout(() => {
+      setMessageSent(false);
+    }, 5000);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [messageSent]);
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const formData = new FormData(e.currentTarget);
-    const name = formData.get("name")?.toString() || "";
-    const senderEmail = formData.get("email")?.toString() || "";
-    const subject = formData.get("subject")?.toString() || "";
-    const message = formData.get("message")?.toString() || "";
+    const form = e.currentTarget;
+    const formData = new FormData(form);
 
-    const body = [`Name: ${name}`, `Email: ${senderEmail}`, "", message].join(
-      "\n",
-    );
+    setIsSending(true);
+    setMessageSent(false);
+    setMessageError(false);
 
-    window.location.href = `mailto:${email}?subject=${encodeURIComponent(
-      subject,
-    )}&body=${encodeURIComponent(body)}`;
+    try {
+      const response = await fetch(formspreeEndpoint, {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Formspree request failed");
+      }
+
+      form.reset();
+      setMessageSent(true);
+    } catch {
+      setMessageError(true);
+    } finally {
+      setIsSending(false);
+    }
+  };
+
+  const handleFormChange = () => {
+    setMessageSent(false);
+    setMessageError(false);
   };
 
   const contactLinks = [
@@ -165,6 +200,7 @@ const Contact = () => {
 
           <form
             onSubmit={handleSubmit}
+            onChange={handleFormChange}
             className="p-6 md:p-7 rounded-2xl flex flex-col gap-5"
             style={{
               backgroundColor: "var(--bg-card)",
@@ -237,15 +273,48 @@ const Contact = () => {
 
             <button
               type="submit"
-              className="flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium rounded-full transition-all duration-200 hover:scale-[1.02]"
+              disabled={isSending}
+              className="flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium rounded-full transition-all duration-200 hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:scale-100"
               style={{
                 backgroundColor: "var(--accent)",
                 color: "var(--bg-primary)",
               }}
             >
-              Send Message
+              {isSending ? "Sending..." : "Send Message"}
               <Send size={15} />
             </button>
+
+            {messageSent && (
+              <div
+                role="status"
+                className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium"
+                style={{
+                  backgroundColor:
+                    "color-mix(in srgb, var(--accent) 14%, var(--bg-secondary))",
+                  border: "1px solid var(--border)",
+                  color: "var(--text-primary)",
+                }}
+              >
+                <CheckCircle2 size={18} style={{ color: "var(--accent)" }} />
+                Message sent successfully.
+              </div>
+            )}
+
+            {messageError && (
+              <div
+                role="alert"
+                className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium"
+                style={{
+                  backgroundColor:
+                    "color-mix(in srgb, #ef4444 12%, var(--bg-secondary))",
+                  border: "1px solid var(--border)",
+                  color: "var(--text-primary)",
+                }}
+              >
+                <CircleAlert size={18} style={{ color: "#ef4444" }} />
+                Something went wrong. Please try again.
+              </div>
+            )}
           </form>
         </div>
       </div>
