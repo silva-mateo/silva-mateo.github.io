@@ -2,7 +2,10 @@ import { Github, Linkedin, Mail, ArrowUpRight, Download } from "lucide-react";
 import { useLanguage } from "../context/languageContext";
 
 const Home = () => {
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
+  const resumeFileName =
+    language === "es" ? "Mateo_Silva_CV_ESP.pdf" : "Mateo_Silva_CV_ENG.pdf";
+  const resumeHref = `/projects/${resumeFileName}`;
 
   const handleEmail = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -111,8 +114,8 @@ const Home = () => {
           </button>
 
           <a
-            href="/Mateo_Silva_CV.pdf"
-            download="Mateo_Silva_CV.pdf"
+            href={resumeHref}
+            download={resumeFileName}
             className="flex items-center gap-2 px-6 py-3 text-sm font-medium rounded-full transition-all duration-200"
             style={{
               backgroundColor: "var(--bg-card)",
