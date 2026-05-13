@@ -34,7 +34,7 @@ const Home = () => {
     e.currentTarget.style.transform = "scale(1)";
   };
 
-  const badges = ["AI Integration", "Web Applications", "Scalable Systems"];
+  const badges = ["Web Applications", "AI Integration", "Scalable Systems"];
 
   return (
     <main
@@ -88,9 +88,9 @@ const Home = () => {
           className="text-base md:text-lg font-normal leading-relaxed max-w-lg"
           style={{ color: "var(--text-secondary)" }}
         >
-          I build software and integrate AI into real-world products. Focused on
-          writing clean, maintainable code and delivering practical, scalable
-          solutions ready to use.
+          I build modern web applications and integrate AI features into
+          practical, real-world products. Focused on clean code, maintainable
+          systems, and scalable solutions ready to use.
         </p>
 
         <div className="flex flex-wrap justify-center gap-4 mt-2">

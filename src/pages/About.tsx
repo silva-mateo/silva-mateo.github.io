@@ -71,7 +71,7 @@ const About = () => {
               className="text-base md:text-lg font-normal leading-relaxed"
               style={{ color: "var(--text-secondary)" }}
             >
-              Prioritizing clear and maintainable code while building modern,
+              Prioritizing clean and maintainable code while building modern,
               practical solutions.
             </p>
           </div>
