@@ -5,6 +5,8 @@ interface Project {
   title: string;
   description: string;
   tags: string[];
+  image: string;
+  imagePosition: string;
   github: string;
   demo?: string;
   liveDemoLabel: string;
@@ -15,18 +17,26 @@ type ProjectData = Omit<Project, "title" | "description" | "liveDemoLabel">;
 const projects: ProjectData[] = [
   {
     tags: ["Python", "LangChain", "ChromaDB", "Gemini API", "Flask"],
+    image: "/projects/project-chatbot.webp",
+    imagePosition: "50% 50%",
     github: "https://github.com/IVANDOS33/Chatbot_Proyecto",
   },
   {
     tags: ["Blazor Server", "C#", "SignalR", "Entity Framework", "SQL Server"],
+    image: "/projects/project-sports.webp",
+    imagePosition: "54% 50%",
     github: "https://github.com/mat1asAlfaro/SportEventManager",
   },
   {
     tags: ["Java", "Jakarta EE 10", "WildFly", "Docker", "Grafana"],
+    image: "/projects/project-payments.webp",
+    imagePosition: "50% 50%",
     github: "https://github.com/mat1asAlfaro/tallerJavaEE",
   },
   {
     tags: ["Flutter", "Dart", "Supabase", "PostgreSQL"],
+    image: "/projects/project-hostel.webp",
+    imagePosition: "48% 50%",
     github: "https://github.com/mat1asAlfaro/HotelApp",
   },
 ];
@@ -35,6 +45,8 @@ const ProjectCard = ({
   title,
   description,
   tags,
+  image,
+  imagePosition,
   github,
   demo,
   liveDemoLabel,
@@ -46,13 +58,22 @@ const ProjectCard = ({
       border: "1px solid var(--border)",
     }}
   >
-    {/* Placeholder image — left side */}
+    {/* Project thumbnail — left side */}
     <div
-      className="w-full sm:w-48 flex-shrink-0 h-40 sm:h-auto"
+      className="h-40 w-full flex-shrink-0 overflow-hidden sm:h-auto sm:w-48"
       style={{
-        background: `linear-gradient(135deg, color-mix(in srgb, var(--accent) 20%, var(--bg-primary)) 0%, var(--bg-secondary) 100%)`,
+        backgroundColor: "var(--bg-secondary)",
       }}
-    />
+    >
+      <img
+        src={image}
+        alt=""
+        loading="lazy"
+        decoding="async"
+        className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+        style={{ objectPosition: imagePosition }}
+      />
+    </div>
 
     {/* Content — right side */}
     <div className="flex flex-col justify-between gap-3 p-5 flex-1">
