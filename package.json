@@ -2,7 +2,12 @@
   "name": "portfolio",
   "private": true,
   "version": "0.0.0",
+  "packageManager": "pnpm@11.1.1",
   "type": "module",
+  "engines": {
+    "node": ">=24 <25",
+    "pnpm": ">=11 <12"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
