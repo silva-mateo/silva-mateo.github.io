@@ -1,76 +1,188 @@
-import { Code2, Monitor, Server, Database, Bot, Wrench } from "lucide-react";
+import { Bot, Code2, Database, Server } from "lucide-react";
+import {
+  SiAngular,
+  SiDocker,
+  SiFastapi,
+  SiFigma,
+  SiGit,
+  SiJavascript,
+  SiLangchain,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiPostgresql,
+  SiPostman,
+  SiPython,
+  SiReact,
+  SiSharp,
+  SiSupabase,
+  SiTypescript,
+} from "react-icons/si";
 import type { ReactNode } from "react";
 
-interface SkillGroup {
+interface SkillItem {
+  name: string;
   icon: ReactNode;
+  color: string;
+}
+
+interface SkillGroup {
   title: string;
-  items: {
-    name: string;
-    badge: string;
-  }[];
+  items: SkillItem[];
 }
 
 const skillGroups: SkillGroup[] = [
   {
-    icon: <Code2 size={20} />,
     title: "Languages",
     items: [
-      { name: "JavaScript", badge: "JS" },
-      { name: "TypeScript", badge: "TS" },
-      { name: "Python", badge: "PY" },
-      { name: "C#", badge: "C#" },
+      {
+        name: "JavaScript",
+        icon: <SiJavascript size={18} />,
+        color: "#f7df1e",
+      },
+      {
+        name: "TypeScript",
+        icon: <SiTypescript size={18} />,
+        color: "#3178c6",
+      },
+      {
+        name: "Python",
+        icon: <SiPython size={18} />,
+        color: "#3776ab",
+      },
+      {
+        name: "C#",
+        icon: <SiSharp size={18} />,
+        color: "#68217a",
+      },
     ],
   },
   {
-    icon: <Monitor size={20} />,
     title: "Frontend",
     items: [
-      { name: "React", badge: "R" },
-      { name: "Next.js", badge: "NX" },
-      { name: "Angular", badge: "NG" },
+      {
+        name: "React",
+        icon: <SiReact size={18} />,
+        color: "#61dafb",
+      },
+      {
+        name: "Next.js",
+        icon: <SiNextdotjs size={18} />,
+        color: "var(--text-primary)",
+      },
+      {
+        name: "Angular",
+        icon: <SiAngular size={18} />,
+        color: "#dd0031",
+      },
     ],
   },
   {
-    icon: <Server size={20} />,
     title: "Backend",
     items: [
-      { name: "Node.js", badge: "ND" },
-      { name: "REST APIs", badge: "API" },
-      { name: "FastAPI", badge: "FA" },
+      {
+        name: "Node.js",
+        icon: <SiNodedotjs size={18} />,
+        color: "#339933",
+      },
+      {
+        name: "REST APIs",
+        icon: <Server size={18} />,
+        color: "#ff6c37",
+      },
+      {
+        name: "FastAPI",
+        icon: <SiFastapi size={18} />,
+        color: "#009688",
+      },
     ],
   },
   {
-    icon: <Database size={20} />,
     title: "Databases",
     items: [
-      { name: "SQL Server", badge: "SQL" },
-      { name: "PostgreSQL", badge: "PG" },
-      { name: "Supabase", badge: "SB" },
+      {
+        name: "SQL Server",
+        icon: <Database size={18} />,
+        color: "#cc2927",
+      },
+      {
+        name: "PostgreSQL",
+        icon: <SiPostgresql size={18} />,
+        color: "#336791",
+      },
+      {
+        name: "Supabase",
+        icon: <SiSupabase size={18} />,
+        color: "#3ecf8e",
+      },
     ],
   },
   {
-    icon: <Bot size={20} />,
     title: "AI & Data",
     items: [
-      { name: "LLM Integration", badge: "AI" },
-      { name: "RAG Systems", badge: "RAG" },
-      { name: "LangChain", badge: "LC" },
-      { name: "Vector Databases", badge: "VDB" },
+      {
+        name: "LLM Integration",
+        icon: <Bot size={18} />,
+        color: "#8b5cf6",
+      },
+      {
+        name: "RAG Systems",
+        icon: <Code2 size={18} />,
+        color: "#06b6d4",
+      },
+      {
+        name: "LangChain",
+        icon: <SiLangchain size={18} />,
+        color: "#1c3c3c",
+      },
+      {
+        name: "Vector Databases",
+        icon: <Database size={18} />,
+        color: "#6366f1",
+      },
     ],
   },
   {
-    icon: <Wrench size={20} />,
     title: "Tools",
     items: [
-      { name: "Git", badge: "GIT" },
-      { name: "Docker", badge: "DK" },
-      { name: "Postman", badge: "PM" },
-      { name: "Figma", badge: "FG" },
+      {
+        name: "Git",
+        icon: <SiGit size={18} />,
+        color: "#f05032",
+      },
+      {
+        name: "Docker",
+        icon: <SiDocker size={18} />,
+        color: "#2496ed",
+      },
+      {
+        name: "Postman",
+        icon: <SiPostman size={18} />,
+        color: "#ff6c37",
+      },
+      {
+        name: "Figma",
+        icon: <SiFigma size={18} />,
+        color: "#a259ff",
+      },
     ],
   },
 ];
 
+const skillGroupOrder = [
+  "Frontend",
+  "Backend",
+  "Databases",
+  "Languages",
+  "AI & Data",
+  "Tools",
+];
+
 const Skills = () => {
+  const orderedSkillGroups = [...skillGroups].sort(
+    (a, b) =>
+      skillGroupOrder.indexOf(a.title) - skillGroupOrder.indexOf(b.title),
+  );
+
   return (
     <section
       id="skills"
@@ -97,7 +209,7 @@ const Skills = () => {
         </div>
 
         <div className="grid grid-cols-1 items-stretch gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {skillGroups.map(({ icon, title, items }) => (
+          {orderedSkillGroups.map(({ title, items }) => (
             <article
               key={title}
               className="group relative flex h-full min-h-56 flex-col gap-4 overflow-hidden rounded-2xl p-4 transition-all duration-300 hover:-translate-y-1"
@@ -106,66 +218,53 @@ const Skills = () => {
                 border: "1px solid var(--border)",
               }}
             >
-              <div
-                className="absolute inset-x-0 top-0 h-1"
-                style={{ backgroundColor: "var(--accent)" }}
-              />
-
               <div className="flex items-center gap-3">
                 <span
-                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl transition-all duration-300 group-hover:scale-105"
-                  style={{
-                    backgroundColor:
-                      "color-mix(in srgb, var(--accent) 14%, var(--bg-secondary))",
-                    color: "var(--accent)",
-                  }}
-                >
-                  {icon}
-                </span>
+                  className="h-px flex-1"
+                  style={{ backgroundColor: "var(--border)" }}
+                />
 
-                <div className="flex min-w-0 flex-1 items-center gap-3">
+                <div className="flex min-w-0 justify-center">
                   <h3
-                    className="text-base font-bold tracking-tight"
+                    className="text-center text-sm font-extrabold uppercase tracking-widest"
                     style={{
-                      color: "var(--text-primary)",
+                      color: "var(--accent)",
                       fontFamily: "var(--font-display)",
                     }}
                   >
                     {title}
                   </h3>
-
-                  <span
-                    className="h-px flex-1"
-                    style={{ backgroundColor: "var(--border)" }}
-                  />
                 </div>
+
+                <span
+                  className="h-px flex-1"
+                  style={{ backgroundColor: "var(--border)" }}
+                />
               </div>
 
               <div className="grid flex-1 content-start gap-2">
-                {items.map(({ name, badge }) => (
+                {items.map(({ name, icon, color }) => (
                   <div
                     key={name}
-                    className="flex min-h-11 items-center justify-start gap-3 rounded-xl px-3 text-left"
+                    className="flex min-h-11 items-center justify-start gap-3 rounded-xl px-3 text-left transition-colors duration-200"
                     style={{
                       backgroundColor:
                         "color-mix(in srgb, var(--text-primary) 4%, var(--bg-secondary))",
-                      border:
-                        "1px solid color-mix(in srgb, var(--border) 80%, transparent)",
                       color: "var(--text-primary)",
                     }}
                   >
                     <span
-                      className="flex h-7 w-10 shrink-0 items-center justify-center rounded-lg text-[0.65rem] font-extrabold tracking-tight"
+                      className="flex h-7 w-10 shrink-0 items-center justify-center rounded-lg"
                       style={{
                         backgroundColor:
-                          "color-mix(in srgb, var(--accent) 14%, var(--bg-card))",
-                        color: "var(--accent)",
+                          "color-mix(in srgb, var(--text-primary) 7%, var(--bg-card))",
+                        color,
                       }}
                     >
-                      {badge}
+                      {icon}
                     </span>
 
-                    <span className="text-xs font-semibold leading-tight">
+                    <span className="text-sm font-semibold leading-tight">
                       {name}
                     </span>
                   </div>
