@@ -1,19 +1,28 @@
-import { Sun, Moon, Menu, X } from "lucide-react";
+import { ChevronDown, Sun, Moon, Menu, X } from "lucide-react";
+import { useLanguage } from "../context/languageContext";
 import { useTheme } from "../context/themeContext";
 import { useEffect, useState } from "react";
 
-const links = [
-  { to: "about", label: "About" },
-  { to: "skills", label: "Skills" },
-  { to: "projects", label: "Projects" },
-  { to: "contact", label: "Contact" },
-];
+const sectionIds = ["about", "skills", "projects", "contact"];
 
 const Navbar = () => {
   const { theme, toggleTheme } = useTheme();
+  const { language, toggleLanguage, t } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+
+  const labelsBySection = {
+    about: t.nav.about,
+    skills: t.nav.skills,
+    projects: t.nav.projects,
+    contact: t.nav.contact,
+  };
+
+  const links = sectionIds.map((to) => ({
+    to,
+    label: labelsBySection[to as keyof typeof labelsBySection],
+  }));
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,7 +51,7 @@ const Navbar = () => {
       },
     );
 
-    const sections = ["home", ...links.map(({ to }) => to)];
+    const sections = ["home", ...sectionIds];
     sections.forEach((id) => {
       const el = document.getElementById(id);
       if (el) observer.observe(el);
@@ -114,6 +123,22 @@ const Navbar = () => {
 
         {/* Actions */}
         <div className="flex items-center gap-3">
+          {/* Language toggle */}
+          <button
+            type="button"
+            onClick={toggleLanguage}
+            className="h-10 px-3 rounded-full flex items-center justify-center gap-1.5 text-sm font-bold uppercase transition-all duration-200 hover:opacity-75"
+            style={{
+              border: "1px solid var(--border)",
+              backgroundColor: "var(--bg-card)",
+              color: "var(--text-primary)",
+            }}
+            aria-label={t.nav.languageToggle}
+          >
+            {language}
+            <ChevronDown size={15} />
+          </button>
+
           {/* Theme toggle */}
           <button
             type="button"
@@ -124,7 +149,7 @@ const Navbar = () => {
               backgroundColor: "var(--bg-card)",
               color: "var(--text-primary)",
             }}
-            aria-label="Toggle theme"
+            aria-label={t.nav.themeToggle}
           >
             {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
           </button>
@@ -135,7 +160,7 @@ const Navbar = () => {
             onClick={() => setMenuOpen((prev) => !prev)}
             className="md:hidden w-10 h-10 flex items-center justify-center"
             style={{ color: "var(--text-primary)" }}
-            aria-label="Toggle menu"
+            aria-label={t.nav.menuToggle}
           >
             {menuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>

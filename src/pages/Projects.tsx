@@ -1,4 +1,5 @@
 import { Github } from "lucide-react";
+import { useLanguage } from "../context/languageContext";
 
 interface Project {
   title: string;
@@ -6,40 +7,38 @@ interface Project {
   tags: string[];
   github: string;
   demo?: string;
+  liveDemoLabel: string;
 }
 
-const projects: Project[] = [
+type ProjectData = Omit<Project, "title" | "description" | "liveDemoLabel">;
+
+const projects: ProjectData[] = [
   {
-    title: "LLM-Powered Conversational Chatbot",
-    description:
-      "Hybrid RAG chatbot combining semantic search with BM25 retrieval. Integrates real-time OracleDB data with internal documentation via LangChain and Gemini API.",
     tags: ["Python", "LangChain", "ChromaDB", "Gemini API", "Flask"],
     github: "https://github.com/IVANDOS33/Chatbot_Proyecto",
   },
   {
-    title: "Sport Event Manager",
-    description:
-      "Platform for managing sports events, runners and registrations. Features live time tracking via SignalR and RFID chip integration for real-time results.",
     tags: ["Blazor Server", "C#", "SignalR", "Entity Framework", "SQL Server"],
     github: "https://github.com/mat1asAlfaro/SportEventManager",
   },
   {
-    title: "Payment Gateway",
-    description:
-      "Enterprise payment processing platform handling merchant management and fund transfers, with rate limiting and full observability through Grafana and InfluxDB.",
     tags: ["Java", "Jakarta EE 10", "WildFly", "Docker", "Grafana"],
     github: "https://github.com/mat1asAlfaro/tallerJavaEE",
   },
   {
-    title: "Mochileros · Hostel Management App",
-    description:
-      "Mobile app for hostel management. Admins handle rooms and bookings while guests self-manage their reservations, built on Supabase with Flutter.",
     tags: ["Flutter", "Dart", "Supabase", "PostgreSQL"],
     github: "https://github.com/mat1asAlfaro/HotelApp",
   },
 ];
 
-const ProjectCard = ({ title, description, tags, github, demo }: Project) => (
+const ProjectCard = ({
+  title,
+  description,
+  tags,
+  github,
+  demo,
+  liveDemoLabel,
+}: Project) => (
   <div
     className="flex flex-col sm:flex-row rounded-2xl overflow-hidden"
     style={{
@@ -118,8 +117,8 @@ const ProjectCard = ({ title, description, tags, github, demo }: Project) => (
                 backgroundColor: "var(--accent)",
                 color: "var(--bg-primary)",
               }}
-            >
-              Live Demo
+          >
+              {liveDemoLabel}
             </a>
           )}
         </div>
@@ -129,6 +128,8 @@ const ProjectCard = ({ title, description, tags, github, demo }: Project) => (
 );
 
 const Projects = () => {
+  const { t } = useLanguage();
+
   return (
     <section
       id="projects"
@@ -141,7 +142,7 @@ const Projects = () => {
             className="text-sm font-medium tracking-widest uppercase mb-3"
             style={{ color: "var(--accent)" }}
           >
-            Projects
+            {t.projects.eyebrow}
           </p>
           <h2
             className="text-4xl md:text-5xl font-extrabold tracking-tight"
@@ -150,13 +151,18 @@ const Projects = () => {
               fontFamily: "var(--font-display)",
             }}
           >
-            What I've built
+            {t.projects.title}
           </h2>
         </div>
 
         <div className="flex flex-col gap-4">
-          {projects.map((project) => (
-            <ProjectCard key={project.title} {...project} />
+          {projects.map((project, index) => (
+            <ProjectCard
+              key={t.projects.items[index].title}
+              {...project}
+              {...t.projects.items[index]}
+              liveDemoLabel={t.projects.liveDemo}
+            />
           ))}
         </div>
       </div>

@@ -1,6 +1,9 @@
 import { Github, Linkedin, Mail, ArrowUpRight, Download } from "lucide-react";
+import { useLanguage } from "../context/languageContext";
 
 const Home = () => {
+  const { t } = useLanguage();
+
   const handleEmail = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     window.location.href = [
@@ -34,8 +37,6 @@ const Home = () => {
     e.currentTarget.style.transform = "scale(1)";
   };
 
-  const badges = ["Web Applications", "AI Integration", "Scalable Systems"];
-
   return (
     <main
       className="min-h-screen flex flex-col items-center justify-center px-8 py-32 text-center"
@@ -62,11 +63,11 @@ const Home = () => {
               fontFamily: "var(--font-display)",
             }}
           >
-            Full Stack Developer
+            {t.home.role}
           </p>
 
           <div className="flex flex-wrap justify-center gap-2 mt-3">
-            {badges.map((badge) => (
+            {t.home.badges.map((badge) => (
               <span
                 key={badge}
                 className="px-3 py-1 text-xs font-medium rounded-full tracking-wide"
@@ -88,9 +89,7 @@ const Home = () => {
           className="text-base md:text-lg font-normal leading-relaxed max-w-lg"
           style={{ color: "var(--text-secondary)" }}
         >
-          I build modern web applications and integrate AI features into
-          practical, real-world products. Focused on clean code, maintainable
-          systems, and scalable solutions ready to use.
+          {t.home.description}
         </p>
 
         <div className="flex flex-wrap justify-center gap-4 mt-2">
@@ -108,7 +107,7 @@ const Home = () => {
             onMouseEnter={handleScaleEnter}
             onMouseLeave={handleScaleLeave}
           >
-            View Projects <ArrowUpRight size={15} />
+            {t.home.projectsButton} <ArrowUpRight size={15} />
           </button>
 
           <a
@@ -129,7 +128,7 @@ const Home = () => {
               e.currentTarget.style.borderColor = "var(--border)";
             }}
           >
-            <Download size={14} /> Resume
+            <Download size={14} /> {t.home.resumeButton}
           </a>
         </div>
 
@@ -138,7 +137,7 @@ const Home = () => {
             href="https://github.com/silva-mateo"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="GitHub"
+            aria-label={t.home.githubLabel}
             style={linkStyle}
             onMouseEnter={handleEnter}
             onMouseLeave={handleLeave}
@@ -150,7 +149,7 @@ const Home = () => {
             href="https://linkedin.com/in/mateosilva"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="LinkedIn"
+            aria-label={t.home.linkedinLabel}
             style={linkStyle}
             onMouseEnter={handleEnter}
             onMouseLeave={handleLeave}
@@ -161,7 +160,7 @@ const Home = () => {
           <a
             href="#"
             onClick={handleEmail}
-            aria-label="Email"
+            aria-label={t.home.emailLabel}
             style={linkStyle}
             onMouseEnter={handleEnter}
             onMouseLeave={handleLeave}

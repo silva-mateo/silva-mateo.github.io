@@ -7,8 +7,10 @@ import {
   CircleAlert,
 } from "lucide-react";
 import { useEffect, useState, type FormEvent } from "react";
+import { useLanguage } from "../context/languageContext";
 
 const Contact = () => {
+  const { t } = useLanguage();
   const email = ["mateosilva.contact", "@", "gmail.com"].join("");
   const formspreeEndpoint = "https://formspree.io/f/xlgzzknq";
   const [isSending, setIsSending] = useState(false);
@@ -20,7 +22,7 @@ const Contact = () => {
 
     const timeoutId = window.setTimeout(() => {
       setMessageSent(false);
-    }, 5000);
+    }, 10000);
 
     return () => window.clearTimeout(timeoutId);
   }, [messageSent]);
@@ -98,7 +100,7 @@ const Contact = () => {
             className="text-sm font-medium tracking-widest uppercase mb-3"
             style={{ color: "var(--accent)" }}
           >
-            Contact
+            {t.contact.eyebrow}
           </p>
 
           <h2
@@ -108,7 +110,7 @@ const Contact = () => {
               fontFamily: "var(--font-display)",
             }}
           >
-            Get in touch
+            {t.contact.title}
           </h2>
         </div>
 
@@ -128,7 +130,7 @@ const Contact = () => {
                   fontFamily: "var(--font-display)",
                 }}
               >
-                Contact information
+                {t.contact.informationTitle}
               </h3>
 
               <div className="flex flex-col gap-6">
@@ -182,7 +184,7 @@ const Contact = () => {
                   fontFamily: "var(--font-display)",
                 }}
               >
-                Current status
+                {t.contact.currentStatusTitle}
               </h4>
 
               <div className="flex items-center gap-3">
@@ -192,7 +194,7 @@ const Contact = () => {
                   className="text-sm md:text-base font-normal leading-relaxed"
                   style={{ color: "var(--text-secondary)" }}
                 >
-                  Available for local and remote opportunities.
+                  {t.contact.currentStatus}
                 </p>
               </div>
             </div>
@@ -214,14 +216,14 @@ const Contact = () => {
                 fontFamily: "var(--font-display)",
               }}
             >
-              Send me a message
+              {t.contact.formTitle}
             </h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <input
                 name="name"
                 type="text"
-                placeholder="Your name"
+                placeholder={t.contact.namePlaceholder}
                 required
                 className={inputClass}
                 style={{
@@ -234,7 +236,7 @@ const Contact = () => {
               <input
                 name="email"
                 type="email"
-                placeholder="Your email"
+                placeholder={t.contact.emailPlaceholder}
                 required
                 className={inputClass}
                 style={{
@@ -248,7 +250,7 @@ const Contact = () => {
             <input
               name="subject"
               type="text"
-              placeholder="Subject"
+              placeholder={t.contact.subjectPlaceholder}
               required
               className={inputClass}
               style={{
@@ -260,7 +262,7 @@ const Contact = () => {
 
             <textarea
               name="message"
-              placeholder="Your message"
+              placeholder={t.contact.messagePlaceholder}
               required
               rows={6}
               className={`${inputClass} resize-none`}
@@ -280,7 +282,7 @@ const Contact = () => {
                 color: "var(--bg-primary)",
               }}
             >
-              {isSending ? "Sending..." : "Send Message"}
+              {isSending ? t.contact.sendingButton : t.contact.sendButton}
               <Send size={15} />
             </button>
 
@@ -296,7 +298,7 @@ const Contact = () => {
                 }}
               >
                 <CheckCircle2 size={18} style={{ color: "var(--accent)" }} />
-                Message sent successfully.
+                {t.contact.successMessage}
               </div>
             )}
 
@@ -312,7 +314,7 @@ const Contact = () => {
                 }}
               >
                 <CircleAlert size={18} style={{ color: "#ef4444" }} />
-                Something went wrong. Please try again.
+                {t.contact.errorMessage}
               </div>
             )}
           </form>

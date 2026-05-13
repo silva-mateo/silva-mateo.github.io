@@ -17,22 +17,28 @@ import {
   SiSupabase,
   SiTypescript,
 } from "react-icons/si";
+import { useLanguage } from "../context/languageContext";
 import type { ReactNode } from "react";
+import type { Translation } from "../i18n/translations";
+
+type SkillGroupKey = keyof Translation["skills"]["groups"];
+type SkillItemKey = keyof Translation["skills"]["items"];
 
 interface SkillItem {
   name: string;
+  nameKey?: SkillItemKey;
   icon: ReactNode;
   color: string;
 }
 
 interface SkillGroup {
-  title: string;
+  titleKey: SkillGroupKey;
   items: SkillItem[];
 }
 
 const skillGroups: SkillGroup[] = [
   {
-    title: "Languages",
+    titleKey: "languages",
     items: [
       {
         name: "JavaScript",
@@ -57,7 +63,7 @@ const skillGroups: SkillGroup[] = [
     ],
   },
   {
-    title: "Frontend",
+    titleKey: "frontend",
     items: [
       {
         name: "React",
@@ -77,7 +83,7 @@ const skillGroups: SkillGroup[] = [
     ],
   },
   {
-    title: "Backend",
+    titleKey: "backend",
     items: [
       {
         name: "Node.js",
@@ -86,6 +92,7 @@ const skillGroups: SkillGroup[] = [
       },
       {
         name: "REST APIs",
+        nameKey: "restApis",
         icon: <Server size={18} />,
         color: "#ff6c37",
       },
@@ -97,7 +104,7 @@ const skillGroups: SkillGroup[] = [
     ],
   },
   {
-    title: "Databases",
+    titleKey: "databases",
     items: [
       {
         name: "SQL Server",
@@ -117,15 +124,17 @@ const skillGroups: SkillGroup[] = [
     ],
   },
   {
-    title: "AI & Data",
+    titleKey: "aiData",
     items: [
       {
         name: "LLM Integration",
+        nameKey: "llmIntegration",
         icon: <Bot size={18} />,
         color: "#8b5cf6",
       },
       {
         name: "RAG Systems",
+        nameKey: "ragSystems",
         icon: <Code2 size={18} />,
         color: "#06b6d4",
       },
@@ -136,13 +145,14 @@ const skillGroups: SkillGroup[] = [
       },
       {
         name: "Vector Databases",
+        nameKey: "vectorDatabases",
         icon: <Database size={18} />,
         color: "#6366f1",
       },
     ],
   },
   {
-    title: "Tools",
+    titleKey: "tools",
     items: [
       {
         name: "Git",
@@ -169,18 +179,21 @@ const skillGroups: SkillGroup[] = [
 ];
 
 const skillGroupOrder = [
-  "Frontend",
-  "Backend",
-  "Databases",
-  "Languages",
-  "AI & Data",
-  "Tools",
-];
+  "frontend",
+  "backend",
+  "databases",
+  "languages",
+  "aiData",
+  "tools",
+] satisfies SkillGroupKey[];
 
 const Skills = () => {
+  const { t } = useLanguage();
+
   const orderedSkillGroups = [...skillGroups].sort(
     (a, b) =>
-      skillGroupOrder.indexOf(a.title) - skillGroupOrder.indexOf(b.title),
+      skillGroupOrder.indexOf(a.titleKey) -
+      skillGroupOrder.indexOf(b.titleKey),
   );
 
   return (
@@ -195,7 +208,7 @@ const Skills = () => {
             className="text-sm font-medium tracking-widest uppercase mb-3"
             style={{ color: "var(--accent)" }}
           >
-            Skills
+            {t.skills.eyebrow}
           </p>
           <h2
             className="text-4xl md:text-5xl font-extrabold tracking-tight"
@@ -204,14 +217,14 @@ const Skills = () => {
               fontFamily: "var(--font-display)",
             }}
           >
-            Tech Stack
+            {t.skills.title}
           </h2>
         </div>
 
         <div className="grid grid-cols-1 items-stretch gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {orderedSkillGroups.map(({ title, items }) => (
+          {orderedSkillGroups.map(({ titleKey, items }) => (
             <article
-              key={title}
+              key={titleKey}
               className="group relative flex h-full min-h-56 flex-col gap-4 overflow-hidden rounded-2xl p-4 transition-all duration-300 hover:-translate-y-1"
               style={{
                 backgroundColor: "var(--bg-card)",
@@ -232,7 +245,7 @@ const Skills = () => {
                       fontFamily: "var(--font-display)",
                     }}
                   >
-                    {title}
+                    {t.skills.groups[titleKey]}
                   </h3>
                 </div>
 
@@ -243,7 +256,7 @@ const Skills = () => {
               </div>
 
               <div className="grid flex-1 content-start gap-2">
-                {items.map(({ name, icon, color }) => (
+                {items.map(({ name, nameKey, icon, color }) => (
                   <div
                     key={name}
                     className="flex min-h-11 items-center justify-start gap-3 rounded-xl px-3 text-left transition-colors duration-200"
@@ -265,7 +278,7 @@ const Skills = () => {
                     </span>
 
                     <span className="text-sm font-semibold leading-tight">
-                      {name}
+                      {nameKey ? t.skills.items[nameKey] : name}
                     </span>
                   </div>
                 ))}

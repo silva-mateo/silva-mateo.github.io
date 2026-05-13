@@ -1,29 +1,16 @@
 import { MapPin, GraduationCap, Laptop2, Languages } from "lucide-react";
+import { useLanguage } from "../context/languageContext";
 
-const cards = [
-  {
-    icon: <MapPin size={18} />,
-    title: "Uruguay",
-    description: "Maldonado",
-  },
-  {
-    icon: <GraduationCap size={18} />,
-    title: "Computer Technology",
-    description: "UTEC",
-  },
-  {
-    icon: <Languages size={18} />,
-    title: "Cambridge B2 First",
-    description: "English Certificate",
-  },
-  {
-    icon: <Laptop2 size={18} />,
-    title: "Full Stack Developer",
-    description: "Integrating AI into real-world applications",
-  },
+const cardIcons = [
+  <MapPin size={18} />,
+  <GraduationCap size={18} />,
+  <Languages size={18} />,
+  <Laptop2 size={18} />,
 ];
 
 const About = () => {
+  const { t } = useLanguage();
+
   return (
     <section
       id="about"
@@ -36,7 +23,7 @@ const About = () => {
             className="text-sm font-medium tracking-widest uppercase mb-3"
             style={{ color: "var(--accent)" }}
           >
-            About
+            {t.about.eyebrow}
           </p>
           <h2
             className="text-4xl md:text-5xl font-extrabold tracking-tight"
@@ -45,39 +32,25 @@ const About = () => {
               fontFamily: "var(--font-display)",
             }}
           >
-            Who I am
+            {t.about.title}
           </h2>
         </div>
 
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="flex flex-col gap-5">
-            <p
-              className="text-base md:text-lg font-normal leading-relaxed"
-              style={{ color: "var(--text-secondary)" }}
-            >
-              I started programming over three years ago, driven by curiosity
-              and the desire to build things that actually work in the real
-              world. What began as experimenting with small projects quickly
-              turned into a genuine passion for software development.
-            </p>
-            <p
-              className="text-base md:text-lg font-normal leading-relaxed"
-              style={{ color: "var(--text-secondary)" }}
-            >
-              Experience across the full stack, finding practical ways to
-              integrate AI into products.
-            </p>
-            <p
-              className="text-base md:text-lg font-normal leading-relaxed"
-              style={{ color: "var(--text-secondary)" }}
-            >
-              Prioritizing clean and maintainable code while building modern,
-              practical solutions.
-            </p>
+            {t.about.paragraphs.map((paragraph) => (
+              <p
+                key={paragraph}
+                className="text-base md:text-lg font-normal leading-relaxed"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                {paragraph}
+              </p>
+            ))}
           </div>
 
           <div className="grid grid-cols-2 gap-3 self-center">
-            {cards.map(({ icon, title, description }) => (
+            {t.about.cards.map(({ title, description }, index) => (
               <div
                 key={title}
                 className="flex flex-col gap-2 p-4 rounded-2xl"
@@ -87,7 +60,9 @@ const About = () => {
                   minHeight: "90px",
                 }}
               >
-                <span style={{ color: "var(--accent)" }}>{icon}</span>
+                <span style={{ color: "var(--accent)" }}>
+                  {cardIcons[index]}
+                </span>
                 <span
                   className="text-sm md:text-base font-semibold leading-tight"
                   style={{ color: "var(--text-primary)" }}
