@@ -1,5 +1,9 @@
 import { Github } from "lucide-react";
 import { useLanguage } from "../context/languageContext";
+import type { Translation } from "../i18n/translations";
+
+type ProjectTagKey = keyof Translation["projects"]["tags"];
+type ProjectTag = string | { tagKey: ProjectTagKey };
 
 interface Project {
   title: string;
@@ -12,11 +16,26 @@ interface Project {
   liveDemoLabel: string;
 }
 
-type ProjectData = Omit<Project, "title" | "description" | "liveDemoLabel">;
+type ProjectData = Omit<
+  Project,
+  "title" | "description" | "tags" | "liveDemoLabel"
+> & {
+  tags: ProjectTag[];
+};
 
 const projects: ProjectData[] = [
   {
-    tags: ["Python", "LangChain", "ChromaDB", "Gemini API", "Flask"],
+    tags: [
+      "Python",
+      "LangChain",
+      "ChromaDB",
+      "Gemini API",
+      "Flask",
+      { tagKey: "llmIntegration" },
+      { tagKey: "rag" },
+      { tagKey: "semanticSearch" },
+      { tagKey: "embeddings" },
+    ],
     image: "/projects/project-chatbot.webp",
     imagePosition: "50% 50%",
     github: "https://github.com/IVANDOS33/Chatbot_Proyecto",
@@ -34,7 +53,7 @@ const projects: ProjectData[] = [
     github: "https://github.com/mat1asAlfaro/tallerJavaEE",
   },
   {
-    tags: ["Flutter", "Dart", "Supabase", "PostgreSQL"],
+    tags: ["Flutter", "Dart", "Supabase"],
     image: "/projects/project-hostel.webp",
     imagePosition: "48% 50%",
     github: "https://github.com/mat1asAlfaro/HotelApp",
@@ -182,6 +201,9 @@ const Projects = () => {
               key={t.projects.items[index].title}
               {...project}
               {...t.projects.items[index]}
+              tags={project.tags.map((tag) =>
+                typeof tag === "string" ? tag : t.projects.tags[tag.tagKey],
+              )}
               liveDemoLabel={t.projects.liveDemo}
             />
           ))}

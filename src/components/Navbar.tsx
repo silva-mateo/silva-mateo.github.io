@@ -151,7 +151,7 @@ const Navbar = () => {
             }}
             aria-label={t.nav.themeToggle}
           >
-            {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+            {theme === "dark" ? <Moon size={18} /> : <Sun size={18} />}
           </button>
 
           {/* Mobile menu button */}

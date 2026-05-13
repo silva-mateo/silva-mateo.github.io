@@ -62,6 +62,8 @@ export const translations = {
         restApis: "REST APIs",
         llmIntegration: "LLM Integration",
         ragSystems: "RAG Systems",
+        semanticSearch: "Semantic Search",
+        embeddings: "Embeddings",
         vectorDatabases: "Vector Databases",
       },
     },
@@ -69,6 +71,12 @@ export const translations = {
       eyebrow: "Projects",
       title: "What I've built",
       liveDemo: "Live Demo",
+      tags: {
+        llmIntegration: "LLM Integration",
+        rag: "RAG",
+        semanticSearch: "Semantic Search",
+        embeddings: "Embeddings",
+      },
       items: [
         {
           title: "LLM-Powered Conversational Chatbot",
@@ -173,6 +181,8 @@ export const translations = {
         restApis: "APIs REST",
         llmIntegration: "Integración LLM",
         ragSystems: "Sistemas RAG",
+        semanticSearch: "Búsqueda Semántica",
+        embeddings: "Embeddings",
         vectorDatabases: "Bases Vectoriales",
       },
     },
@@ -180,6 +190,12 @@ export const translations = {
       eyebrow: "Proyectos",
       title: "Lo que construí",
       liveDemo: "Demo",
+      tags: {
+        llmIntegration: "Integración LLM",
+        rag: "RAG",
+        semanticSearch: "Búsqueda Semántica",
+        embeddings: "Embeddings",
+      },
       items: [
         {
           title: "Chatbot Conversacional con LLM",

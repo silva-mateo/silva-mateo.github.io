@@ -1,10 +1,11 @@
-import { Bot, Code2, Database, Server } from "lucide-react";
+import { Bot, BrainCircuit, Code2, Database, Server } from "lucide-react";
 import {
-  SiAngular,
   SiDocker,
+  SiExpress,
   SiFastapi,
   SiFigma,
   SiGit,
+  SiGithub,
   SiJavascript,
   SiLangchain,
   SiNextdotjs,
@@ -15,7 +16,9 @@ import {
   SiReact,
   SiSharp,
   SiSupabase,
+  SiTailwindcss,
   SiTypescript,
+  SiVite,
 } from "react-icons/si";
 import { useLanguage } from "../context/languageContext";
 import type { ReactNode } from "react";
@@ -76,9 +79,14 @@ const skillGroups: SkillGroup[] = [
         color: "var(--text-primary)",
       },
       {
-        name: "Angular",
-        icon: <SiAngular size={18} />,
-        color: "#dd0031",
+        name: "Tailwind CSS",
+        icon: <SiTailwindcss size={18} />,
+        color: "#06b6d4",
+      },
+      {
+        name: "Vite",
+        icon: <SiVite size={18} />,
+        color: "#646cff",
       },
     ],
   },
@@ -89,6 +97,11 @@ const skillGroups: SkillGroup[] = [
         name: "Node.js",
         icon: <SiNodedotjs size={18} />,
         color: "#339933",
+      },
+      {
+        name: "Express",
+        icon: <SiExpress size={18} />,
+        color: "var(--text-primary)",
       },
       {
         name: "REST APIs",
@@ -107,14 +120,20 @@ const skillGroups: SkillGroup[] = [
     titleKey: "databases",
     items: [
       {
+        name: "PostgreSQL",
+        icon: <SiPostgresql size={18} />,
+        color: "#336791",
+      },
+      {
         name: "SQL Server",
         icon: <Database size={18} />,
         color: "#cc2927",
       },
       {
-        name: "PostgreSQL",
-        icon: <SiPostgresql size={18} />,
-        color: "#336791",
+        name: "Vector Databases",
+        nameKey: "vectorDatabases",
+        icon: <Database size={18} />,
+        color: "#6366f1",
       },
       {
         name: "Supabase",
@@ -144,10 +163,10 @@ const skillGroups: SkillGroup[] = [
         color: "#1c3c3c",
       },
       {
-        name: "Vector Databases",
-        nameKey: "vectorDatabases",
-        icon: <Database size={18} />,
-        color: "#6366f1",
+        name: "Embeddings",
+        nameKey: "embeddings",
+        icon: <BrainCircuit size={18} />,
+        color: "#f59e0b",
       },
     ],
   },
@@ -158,6 +177,11 @@ const skillGroups: SkillGroup[] = [
         name: "Git",
         icon: <SiGit size={18} />,
         color: "#f05032",
+      },
+      {
+        name: "GitHub",
+        icon: <SiGithub size={18} />,
+        color: "var(--text-primary)",
       },
       {
         name: "Docker",
@@ -179,10 +203,10 @@ const skillGroups: SkillGroup[] = [
 ];
 
 const skillGroupOrder = [
+  "languages",
   "frontend",
   "backend",
   "databases",
-  "languages",
   "aiData",
   "tools",
 ] satisfies SkillGroupKey[];
